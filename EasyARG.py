@@ -73,7 +73,7 @@ class MyVectorDBConnector:
         self.collection = chroma_client.get_or_create_collection(name="demo")
         self.embedding_fn = embedding_fn
 
-    def add_documents(self, documents, metadata={}):
+    def add_documents(self, documents):
         '''向 collection 中添加文档与向量'''
         self.collection.add(
             embeddings=self.embedding_fn(documents),
@@ -92,7 +92,7 @@ class MyVectorDBConnector:
         return results
 
 class RAG_Bot:
-    def __init__(self, paragraphs, llm_api, vector_db, n_results=4):
+    def __init__(self, paragraphs, llm_api, vector_db, n_results=3):
         self.vector_db = vector_db
         self.vector_db.add_documents(paragraphs)
         self.llm_api = llm_api
